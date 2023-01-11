@@ -1,0 +1,98 @@
+#header{
+    height: 250px;
+}
+body{
+    background-color: rgb(255, 255, 255);
+}
+img{
+    height: 250px;
+    width: 100%;
+}
+#nav{
+    height: 65px;
+    text-align: center;
+    background-color: darkslategrey;
+    
+}
+a{
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+}
+#nav ul{
+    margin-top: 0px;
+}
+#nav li{
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: -30px;
+}
+#sidbar{
+   height: 650px;
+    width: 150px;
+    float: left;
+    background-color: lightslategrey;
+}
+
+li{
+    margin-left: -50px;
+    margin-top: 25px;
+    list-style-type:none;
+}
+#main{
+    height: 650px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 30px;
+}
+#footer{
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    height: 100px;
+    margin-top: 127px;
+}
+
+#footerHome{
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        height: 100px;
+        margin-top: -80px;
+}
+
+.as{
+    direction: rtl;
+    border: 20px;
+    color: white;
+    margin: 50;
+    padding: 20;
+    text-decoration: solid;
+    border: 0ch;
+    border-radius: 5%;
+    outline: 10px;
+    cursor: pointer;
+    transition: all 0.5s linear;
+}
+.as:hover,
+.as:focus{
+background: rgb(253, 253, 253);
+color: black;
+}
+as:active{
+background: rgb(255, 255, 255);
+}
+
+.button
+{
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
