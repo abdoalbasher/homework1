@@ -96,3 +96,58 @@ background: rgb(255, 255, 255);
     box-shadow: 0 9px #999;
   }
   
+  * {
+    box-sizing: border-box;
+  }
+/*sit colum size*/
+
+.column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 300px;
+}
+/*sit row size*/
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+th {
+    color: black;
+    padding: 5px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
+    color: black;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding-left: 30px;
+    padding-right: 30px
+}
+
+table {
+    border: 1px solid rgb(9, 9, 9);
+    border-collapse: collapse;
+}
+
+button{
+
+    color:aquamarine;
+    
+}
+
+.b1{
+   
+     margin-top: 15px;
+    
+}
