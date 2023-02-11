@@ -72,10 +72,43 @@ if(!$_SESSION['username']){
 
         </ul>
     </div>
+    <style>
+    .form-control,
+    .control-label {
+        width: 500px;
+        margin: 30px 18pc;
+    }
+    </style>
     <div id="main">
-        <center>
-            <h1 style="padding-top: 130px;"> تم الدفع شكرا لزيارتكم</h1>
-        </center>
+        <div class="container">
+            <h2 style="text-align:center;"> إضافة اصناف</h2>
+            <form action="addproducts.php" method="POST" class=" form-horizontal">
+                <div class="form-group">
+                    <label class="control-label" for="email">name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" class="form-control" id="email" placeholder="Enter name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="pwd">price:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="price" class="form-control" id="pwd" placeholder="Enter price">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="pwd">quantity:</label>
+                    <div class="col-sm-10">
+                        <input type="number" name="quantity" class="form-control" id="pwd" placeholder="Enter quantity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input style="margin-left: 720px;" name="add" type="submit" class="btn btn-default"
+                            value="إضافة صنف">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div id="footer">
 
@@ -90,3 +123,23 @@ if(!$_SESSION['username']){
 </script>
 
 </html>
+
+<?php
+
+require_once "dbconn.php";
+
+$conn=new mysqli($lh,$un,$pw,$db);
+if($conn->connect_error){
+    echo "connection fail";
+}
+if(isset($_POST['add'])){
+$name=$_POST['name'];
+$price=$_POST['price'];
+$quantity=$_POST['quantity'];
+$insert="insert into products(name,price,quantity)values('$name','$price','$quantity')";
+$result=$conn->query($insert);
+echo '<script>
+window.location.href = "products.php";
+</script>';
+}
+?>

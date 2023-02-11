@@ -4,6 +4,7 @@ $id=$_SESSION['id'];
 if(!$_SESSION['username']){
     header("location: login.php");
 }
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     require_once "dbconn.php";
     $conn=new mysqli($lh,$un,$pw,$db);
     $select="select * from useres where id='$id' and role=1";
@@ -76,7 +77,7 @@ if(!$_SESSION['username']){
         margin: 0;
         font-size: 0.9em;
         font-family: sans-serif;
-        min-width: 1100px;
+        min-width: 1150px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
 
@@ -128,10 +129,6 @@ if(!$_SESSION['username']){
         <!-- <div class="row">
             <div class="column"> -->
         <div class="continar" style="width:100%;">
-            <form action="category.php" method="post">
-                <button type="submit" name="pay" style="float:right;background-color: #009879;" class="button1"
-                    href="addproducts.php">الدفع</button>
-            </form>
             <table class="styled-table">
                 <thead>
                     <tr>
@@ -139,6 +136,7 @@ if(!$_SESSION['username']){
                         <th>name</th>
                         <th>price</th>
                         <th>quantity</th>
+                        <th>cartshop</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,20 +145,28 @@ if(!$_SESSION['username']){
          require_once "dbconn.php";
          $conn=new mysqli($lh,$un,$pw,$db);
          
-            //  $select="select product_name,price,sum(quantity) as qty from cartshop where user_id='$id' group by product_name ";
-             $select="select * from cartshop where user_id='$id'";
+             $select="select * from products where quantity>0";
              $result=$conn->query($select);
              $row=$result->num_rows;
              for($i=0;$i<$row;){
-                $rows=$result->fetch_array(MYSQLI_ASSOC);
+            $rows=$result->fetch_array(MYSQLI_ASSOC);
         ?>
                     <tr class="active-row">
                         <td><?php echo ++$i;?></td>
-                        <td><?php echo $rows['product_name'];?></td>
-                        <td><?php echo $rows['price']*$rows['quantity'];?></td>
-                        <td><?php echo $rows['quantity'];?></td>
-                        <!-- <td><?php echo $rows['price']*$rows['qty'];?></td>
-                        <td><?php echo $rows['qty'];?></td> -->
+                        <td><?php echo $rows['name'];?></td>
+                        <td><?php echo $rows['price'];?></td>
+                        <form action="cartshop.php" method="post">
+                            <td><input type="number" name="quantity" value="1" min=1
+                                    max="<?php echo $rows['quantity'];?>">
+                            </td>
+                            <td>
+                                <input type="hidden" name="id" value="<?php echo $rows['id'];?>">
+                                <input type="hidden" name="name" value="<?php echo $rows['name'];?>">
+                                <input type="hidden" name="price" value="<?php echo $rows['price'];?>">
+                                <!-- <input type="hidden" name="quantity" value=""> -->
+                                <input type="submit" name="addcart" value="إضافة للعربة">
+                        </form>
+                        </td>
 
                     </tr>
                     <?php
@@ -187,12 +193,37 @@ if(!$_SESSION['username']){
 </html>
 
 <?php
-if(isset($_POST['pay'])){
-$delete="delete from cartshop where user_id='$id'";
-$result=$conn->query($delete);
-echo '<script>
-alert("تم الدفع شكرا لكم");
-window.location.href = "cartshop.php";
-</script>';
+
+require_once "dbconn.php";
+
+$conn=new mysqli($lh,$un,$pw,$db);
+if($conn->connect_error){
+    echo "connection fail";
+}
+if(isset($_POST['addcart'])){
+$id_product=$_POST['id'];
+$name=$_POST['name'];
+$price=$_POST['price'];
+$quantity=$_POST['quantity'];
+
+$conn->begin_transaction();
+try {
+    $insert="insert into cartshop(user_id,product_name,price,quantity)values('$id','$name','$price','$quantity')";
+    $result=$conn->query($insert);
+    $update="update products set quantity=quantity-'$quantity' where id='$id_product'";
+    $res=$conn->query($update);
+    $conn->commit();
+    echo '<script>
+    window.location.href = "cartshop.php";
+    </script>';
+} catch (mysqli_sql_exception $exception) {
+    $conn->rollback();
+    $conn=null;
+    echo '<script>
+    alert("نفدت الكمية");
+    window.location.href = "cartshop.php";
+    </script>';
+}
+
 }
 ?>

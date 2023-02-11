@@ -67,26 +67,115 @@ if(!$_SESSION['username']){
             <li><a href="contact us.php " class="as">contact us </a></li>
             <li><a href="Price.php " class="as">Price</a></li>
             <li><a href="login.php" class="as">login</a></li>
-            <li><a href="login.php" class="as">login</a></li>
             <li><a href="register.php" class="as">register</a></li>
-
         </ul>
     </div>
+    <style>
+    .styled-table {
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 1100px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+    }
+
+    .styled-table tbody tr.active-row {
+        font-weight: bold;
+        color: #009879;
+    }
+
+    .button1 {
+
+        display: inline-block;
+        padding: 12px 22px;
+        font-size: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 9px #999;
+    }
+    </style>
     <div id="main">
-        <center>
-            <h1 style="padding-top: 130px;"> تم الدفع شكرا لزيارتكم</h1>
-        </center>
+        <!-- <div class="row">
+            <div class="column"> -->
+        <div class="continar" style="width:100%;">
+            <a style="float:right;background-color: #009879;" class="button1" href="addproducts.php">add</a>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>name</th>
+                        <th>price</th>
+                        <th>quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php
+         require_once "dbconn.php";
+         $conn=new mysqli($lh,$un,$pw,$db);
+         
+             $select="select * from products";
+             $result=$conn->query($select);
+             $row=$result->num_rows;
+             for($i=0;$i<$row;){
+                 $rows=$result->fetch_array(MYSQLI_ASSOC);
+        ?>
+                    <tr class="active-row">
+                        <td><?php echo ++$i;?></td>
+                        <td><?php echo $rows['name'];?></td>
+                        <td><?php echo $rows['price'];?></td>
+                        <td><?php echo $rows['quantity'];?></td>
+
+                    </tr>
+                    <?php
+             }
+        ?>
+                </tbody>
+            </table>
+
+            <!-- </div>
+       
+
+-->
+
+        </div>
     </div>
+
     <div id="footer">
+        <h4>ＣｏｐｙＲｉｇｈｔ_@2022</h4>
+    </div>
 
-    </div>
-    <div id="footerHome">
-        <h4>ＣｏｐｙＲｉｇｈｔ_＠２０２２</h4>
-    </div>
+
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
-</script>
 
 </html>

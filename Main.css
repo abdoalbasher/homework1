@@ -84,7 +84,7 @@ background: rgb(255, 255, 255);
 {
     display: inline-block;
     padding: 15px 25px;
-    font-size: 24px;
+    font-size: 15px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -150,4 +150,56 @@ button{
    
      margin-top: 15px;
     
+}
+.styled-table {
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 1100px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.button1 {
+
+    display: inline-block;
+    padding: 12px 22px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 9px #999;
 }
